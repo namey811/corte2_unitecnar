@@ -4,28 +4,33 @@
 
 @section('content')
     <div class="container mt-4">
-        <p>Login Page</p>
+        <p>Register Page</p>
         <div>
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
             @endif
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
         </div>
-        <form method="POST" action=" {{ route('validate') }} ">
+        <form method="POST" action=" {{ route('register_user') }} ">
             @csrf
             <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">Username:</label>
+                <label for="formGroupExampleInput" class="form-label">Nombre:</label>
+                <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
+                    name="name" value="{{ old('name') }}" placeholder="Digite su nombre" required>
+                @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Correo:</label>
                 <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
                     name="email" value="{{ old('email') }}" placeholder="Digite su email" required>
                 @error('email')
-                    <div class="alert alert-primary" role="alert">
-                        {{  $message }}
+                    <div class="invalid-feedback">
+                        {{ $message }}
                     </div>
                 @enderror
             </div>
