@@ -74,3 +74,12 @@ Route::get('crear_comentario', function () {
     return 'Comentario creado';
 });
 
+Route::get('crear_comentario2', function () {
+    
+    $post = Post::find(2);
+    $post->comments()->create([
+        'content' => 'Este es un comentario2',
+    ]);
+    return 'Comentario creado con relacion al post';
+});
+
